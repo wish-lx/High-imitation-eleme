@@ -10,7 +10,7 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-import vHeader from 'components/header/header'
+import vHeader from 'components/header/vheader'
 
 const ERR_OK = 0
 export default {

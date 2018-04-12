@@ -28,7 +28,10 @@ module.exports = {
     'indent': 0,
     'space-before-function-paren':0,
     "no-trailing-spaces": "off",
-    'no-multiple-empty-lines': "off"
+    'no-multiple-empty-lines': "off",
+    'key-spacing':'off',
+    'space-in-parens':'off',
+    'space-before-blocks':'off'
     
   }
 }
