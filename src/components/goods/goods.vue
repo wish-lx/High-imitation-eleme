@@ -2,7 +2,8 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item,index) in goods" :key="item.id" class="menu-item" :class="{'current': currentIndex === index}"  >
+        <li v-for="(item,index) in goods" :key="item.id" class="menu-item" :class="{'current': currentIndex === index}" 
+        @click="selectMenu(index,$event)" >
           <span class="text border-1px" >
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]" ></span>
              {{item.name}}
@@ -91,6 +92,14 @@ const ERR_OK = 0
         this.foodsScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y))
         })
+      },
+      selectMenu(index, event){
+         if (!event._constructed) {
+           return
+         }
+          let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook') 
+          let el = foodList[index]
+          this.foodsScroll.scrollToElement(el, 300)
       },
       _calculateHeight() {
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook')
