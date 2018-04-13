@@ -32,6 +32,7 @@ module.exports = {
     'key-spacing':'off',
     'space-in-parens':'off',
     'space-before-blocks':'off'
+   
     
   }
 }
