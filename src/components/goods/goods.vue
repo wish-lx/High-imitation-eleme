@@ -229,5 +229,8 @@ const ERR_OK = 0
            text-decoration:line-through
            font-size: 10px 
            color: rgb(147,153,159)
-
+       .cartcontrol
+         position:absolute 
+         right:0 
+         bottom: 12px 
 </style>
