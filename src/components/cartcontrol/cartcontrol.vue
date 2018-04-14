@@ -39,7 +39,7 @@
         }
       }
     }
-  };
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

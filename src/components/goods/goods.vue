@@ -31,7 +31,7 @@
                      <span v-show="food.oldPrice" class="old">￥{{food.oldPrice}}</span>
                    </div>
                    <div class="cartcontrol-wrapper">
-                     <cartcontrol :food="food"></cartcontrol>
+                     <cartcontrol @add="addFood" :food="food"></cartcontrol>
                    </div>
                  </div>
              </li>
@@ -39,7 +39,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -65,11 +65,22 @@ const ERR_OK = 0
         for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i]
           let height2 = this.listHeight[i + 1]
-          if ( !height2 || (this.scrollY >= height1 && this.scrollY < height2 )) {
+          if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
             return i
           }
         }
         return 0
+      },
+      selectFoods() {
+        let foods = []
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food)
+            }
+          })
+        })
+        return foods
       }
     },
     created () {
@@ -88,6 +99,14 @@ const ERR_OK = 0
       })
     },
     methods: {
+      addFood(target) {
+        this._drop(target)
+      },
+      _drop(target){
+        this.$nextTick(() => {
+            this.$refs.shopcart.drop(target)
+        })
+      },
        _initScroll() {
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
