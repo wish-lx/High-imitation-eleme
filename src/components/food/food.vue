@@ -21,9 +21,19 @@
              <cartcontrol :food="food" @add="addFood"></cartcontrol>
           </div>
           <transition name="fade">
-            <div class="buy" @click="addFirst" v-show="!food.count || food.count === 0">加入购物车</div>
+            <div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count === 0">加入购物车</div>
           </transition>
           
+        </div>
+        <split v-show="food.info"></split>
+        <div class="info" v-show="food.info">
+          <h1 class="title">商品信息</h1>
+          <p class="text"> {{food.info}}</p>
+        </div>
+        <split v-show="food.info"></split>
+        <div class="rating">
+          <h1 class="title">商品评价</h1>
+          <ratingselect :select-type="selectType" :only-content="onlyContent" :ratings="food.ratings" :desc="desc"></ratingselect>
         </div>
       </div>
     </div>
@@ -34,6 +44,12 @@
 import Vue from 'vue'
 import BScroll from 'better-scroll'
 import cartcontrol from 'components/cartcontrol/cartcontrol'
+import split from 'components/split/split'
+import ratingselect from 'components/ratingselect/ratingselect'
+
+// const POSITIVE = 0
+// const NEGTIVE = 1 
+const ALL = 2
   export default {
     name: 'food',
     props: {
@@ -43,7 +59,14 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
     },
     data() {
       return {
-        showFlag: false
+        showFlag: false,
+        selectType: ALL,
+        onlyContent: true,
+        desc: {
+          all: '全部',
+          positive: '全部',
+          negative: '吐槽'
+        }
       }
     },
     methods: {
@@ -59,6 +82,8 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
       },
       show() {
         this.showFlag = true
+        this.selectType = ALL
+        this.onlyContent = true
         this.$nextTick(() => {
           if (!this.scroll) {
             this.scroll = new BScroll(this.$refs.food, {
@@ -74,7 +99,9 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
       }
     },
     components: {
-      cartcontrol
+      cartcontrol,
+      split,
+      ratingselect
     }
   }
 </script>
@@ -112,7 +139,8 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
         padding: 10px
         font-size: 20px 
         color: #fff
-  .content 
+  .content
+    position:relative 
     padding: 18px
     .title
       margin-bottom: 8px
@@ -165,7 +193,25 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
          transition: all 0.2s
        &.fade-enter,&.fade-leave-active
          opacity: 0
-     
+  .info
+    padding: 18px
+    .title 
+      line-height: 14px 
+      margin-bottom: 6px 
+      font-size: 14px 
+      color: rgb(7,17,27)
+    .text 
+      line-height: 24px 
+      padding: 0 8px 
+      font-size: 12px
+      color:rgb(77,85,93) 
+  .rating
+    padding-top: 18px 
+    .title
+      line-height: 14px 
+      margin-left: 18px 
+      font-size: 14px 
+      color: rgb(7,17,27)
            
 
 
