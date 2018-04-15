@@ -20,7 +20,10 @@
           <div class="cartcontrol-wrapper">
              <cartcontrol :food="food" @add="addFood"></cartcontrol>
           </div>
-          <div class="buy" @click="addFirst" v-show="!food.count || food.count === 0">加入购物车</div>
+          <transition name="fade">
+            <div class="buy" @click="addFirst" v-show="!food.count || food.count === 0">加入购物车</div>
+          </transition>
+          
         </div>
       </div>
     </div>
@@ -157,6 +160,11 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
        font-size: 10px 
        color: #fff 
        background: rgb(0, 160, 220)
+       opacity: 1 
+       &.fade-enter-active,&.fade-leave-active
+         transition: all 0.2s
+       &.fade-enter,&.fade-leave-active
+         opacity: 0
      
            
 
