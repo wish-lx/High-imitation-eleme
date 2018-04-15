@@ -18,9 +18,9 @@
             <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">{{food.oldPrice}}</span>
           </div>
           <div class="cartcontrol-wrapper">
-             <cartcontrol :food="food"></cartcontrol>
+             <cartcontrol :food="food" @add="addFood"></cartcontrol>
           </div>
-          <div class="buy" v-show="!food.count || food.count === 0">加入购物车</div>
+          <div class="buy" @click="addFirst" v-show="!food.count || food.count === 0">加入购物车</div>
         </div>
       </div>
     </div>
@@ -28,6 +28,7 @@
   
 </template>
 <script type="text/ecmascript-6">
+import Vue from 'vue'
 import BScroll from 'better-scroll'
 import cartcontrol from 'components/cartcontrol/cartcontrol'
   export default {
@@ -43,10 +44,20 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
       }
     },
     methods: {
+      addFirst(event){
+        if (!event._constructed) {
+          return 
+        }
+        Vue.set(this.food, 'count', 1)
+        this.$emit('add', event.target)
+      },
+      addFood(target) {
+         this.$emit('add', target)
+      },
       show() {
         this.showFlag = true
         this.$nextTick(() => {
-          if(!this.scroll) {
+          if (!this.scroll) {
             this.scroll = new BScroll(this.$refs.food, {
               click: true
             })
