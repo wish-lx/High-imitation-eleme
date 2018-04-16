@@ -57,12 +57,12 @@ const ALL = 2
     computed: {
       positives() {
         return this.ratings.filter((rating) => {
-          return rating.rateatype === POSITIVE
+          return rating.rateType === POSITIVE
         })
       },
       negatives() {
         return this.ratings.filter((rating) => {
-          return rating.rateatype === NEGATIVE
+          return rating.rateType === NEGATIVE
         })
       }
     },
