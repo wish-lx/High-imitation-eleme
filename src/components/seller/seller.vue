@@ -36,6 +36,13 @@
           <p class="content">{{seller.bulletin}}</p>
         </div>
       </div>
+      <ul v-if="seller.supports" class="supports">
+          <li class="support-item" v-for="(item,index) in seller.supports" :key="item.id">
+              <span class="icon" :class="classMap[seller.supports[index].type]">
+              </span>
+              <span class="text"> {{seller.supports[index].description}}</span>
+          </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -71,7 +78,6 @@ export default {
      font-size: 14px
     .desc 
       padding-bottom: 18px
-      
       border-1px(rgba(7,17,27,0.1))
       font-size: 0
       .star 
@@ -95,12 +101,26 @@ export default {
         &:last-child
           border:none
         h2
-        margin-bottom: 4px 
-        line-height: 10px 
-        font-size: 10px 
-        color: rgb(147,153,159)
-        .content 
-          line-height: 24px 
-          font-size: 10px
-
+          margin-bottom: 4px 
+          line-height: 10px 
+          font-size: 10px 
+          color: rgb(147,153,159)
+          .content 
+            line-height: 24px 
+            font-size: 10px
+  .bulletin 
+    padding: 18px 18px 0 18px 
+    .title 
+      margin-bottom: 8px 
+      line-height: 14px 
+      color: rgb(7,17,27)
+      font-size: 14px 
+    .content-wrapper 
+      padding: 0 12px 16px 12px 
+      border-1px(rgba(7,17,27,0.1))
+      .content 
+        line-height: 24px 
+        font-size: 12px 
+        color: rgb(240,20,20)
+    
 </style>
