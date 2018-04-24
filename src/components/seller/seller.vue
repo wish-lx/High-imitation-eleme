@@ -29,18 +29,27 @@
           </li>
         </ul>
       </div>
+      <split></split>
+      <div class="bulletin">
+        <h1 class="title">公告与活动</h1>
+        <div class="content-wrapper">
+          <p class="content">{{seller.bulletin}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
 import star from 'components/star/star'
+import split from 'components/split/split'
 export default {
   name: 'seller',
   props:{
     seller:Object
   },
   components: {
-    star
+    star,
+    split
   }
 }
 </script>
@@ -62,7 +71,7 @@ export default {
      font-size: 14px
     .desc 
       padding-bottom: 18px
-      line-height: 18px 
+      
       border-1px(rgba(7,17,27,0.1))
       font-size: 0
       .star 
@@ -71,7 +80,8 @@ export default {
         vertical-align: top
       .text 
         margin-right: 12px 
-        display: inline-block 
+        display: inline-block
+        line-height: 18px  
         vertical-align: top
         font-size: 10px 
         color: rgb(77,85,93)
