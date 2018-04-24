@@ -37,7 +37,7 @@
         </div>
       </div>
       <ul v-if="seller.supports" class="supports">
-          <li class="support-item" v-for="(item,index) in seller.supports" :key="item.id">
+          <li class="support-item border-1px" v-for="(item,index) in seller.supports" :key="item.id">
               <span class="icon" :class="classMap[seller.supports[index].type]">
               </span>
               <span class="text"> {{seller.supports[index].description}}</span>
@@ -53,6 +53,11 @@ export default {
   name: 'seller',
   props:{
     seller:Object
+  },
+  created() {
+    this.classMap = [
+      'decrease', 'discount', 'special', 'invoice', 'guarantee'
+    ]
   },
   components: {
     star,
@@ -108,6 +113,8 @@ export default {
           .content 
             line-height: 24px 
             font-size: 10px
+            .stress
+              font-size: 24px
   .bulletin 
     padding: 18px 18px 0 18px 
     .title 
@@ -122,5 +129,33 @@ export default {
         line-height: 24px 
         font-size: 12px 
         color: rgb(240,20,20)
-    
+  .supports
+    .support-item 
+      padding: 16px 30px 
+      border-1px(rgba(7,17,27,0.1))
+      font-size: 0
+      &:last-child 
+        border-none()
+    .icon
+      display: inline-block
+      width: 16px
+      height: 16px
+      margin-right: 6px
+      background-size: 16px 16px
+      background-repeat: no-repeat
+      vertical-align: top
+      &.decrease
+        bg-image('decrease_4')
+      &.discount
+        bg-image('discount_4')
+      &.special
+        bg-image('special_4')
+      &.invoice
+        bg-image('invoice_4')
+      &.guarantee 
+        bg-image('guarantee_4')
+    .text 
+      line-height: 16px 
+      font-size: 12px 
+      color: rgb(7,17,27)
 </style>
