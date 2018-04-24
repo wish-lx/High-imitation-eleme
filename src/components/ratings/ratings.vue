@@ -63,7 +63,7 @@
   import split from 'components/split/split'
   const ALL = 2
   const ERR_OK = 0
-  const debug = process.env.NODE_ENV !== 'production'
+ 
   export default {
     props: {
       seller: {

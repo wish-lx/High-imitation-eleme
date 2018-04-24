@@ -6,7 +6,7 @@
         <div class="desc border-1px">
           <star :size="36" :score="seller.score"></star>
           <span class="text">{{seller.ratingCount}}</span>
-          <span class="text">{{seller.sellCount}}</span>
+          <span class="text">月售{{seller.sellCount}}单</span>
         </div>
         <ul class="remark">
           <li class="block">
@@ -60,21 +60,37 @@ export default {
      line-height: 14px 
      color: rgb(7,17,27)
      font-size: 14px
-     .desc 
-       padding-bottom: 18px
-       line-height: 18px 
-       border-1px(rgba(7,17,27,0.1))
-       font-size: 0
-       .star 
-         display: inline-block 
-         margin-right: 8px 
-         vertical-align: top
-       .text 
-         margin-right: 12px 
-         display: inline-block 
-         vertical-align: top
-         font-size: 10px 
-         color: rgb(77,85,93)
-
+    .desc 
+      padding-bottom: 18px
+      line-height: 18px 
+      border-1px(rgba(7,17,27,0.1))
+      font-size: 0
+      .star 
+        display: inline-block 
+        margin-right: 8px 
+        vertical-align: top
+      .text 
+        margin-right: 12px 
+        display: inline-block 
+        vertical-align: top
+        font-size: 10px 
+        color: rgb(77,85,93)
+    .remark 
+      display: flex   
+      padding-top: 18px 
+      .block 
+        flex: 1 
+        text-align: center 
+        border-right: 1px solid rgba(7,17,27,0.1)
+        &:last-child
+          border:none
+        h2
+        margin-bottom: 4px 
+        line-height: 10px 
+        font-size: 10px 
+        color: rgb(147,153,159)
+        .content 
+          line-height: 24px 
+          font-size: 10px
 
 </style>
