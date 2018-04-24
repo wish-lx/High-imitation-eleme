@@ -29,7 +29,7 @@
                     :ratings="ratings"></ratingselect>
       <div class="rating-wrapper">
         <ul>
-          <li v-for="rating in ratings" v-show="needShow(rating.rateType, rating.text)" class="rating-item">
+          <li v-for="rating in ratings" :key="rating.id" v-show="needShow(rating.rateType, rating.text)" class="rating-item">
             <div class="avatar">
               <img width="28" height="28" :src="rating.avatar">
             </div>
@@ -42,7 +42,7 @@
               <p class="text">{{rating.text}}</p>
               <div class="recommend" v-show="rating.recommend && rating.recommend.length">
                 <span class="icon-thumb_up"></span>
-                <span class="item" v-for="item in rating.recommend">{{item}}</span>
+                <span class="item" v-for="item in rating.recommend" :key="item.id">{{item}}</span>
               </div>
               <div class="time">
                 {{rating.rateTime | formatDate}}
@@ -77,8 +77,7 @@
         onlyContent: true
       }
     },
-    created() {
-     
+    created () {
       this.$http.get('/api/ratings').then((response) => {
         response = response.body
         if (response.errno === ERR_OK) {
@@ -92,7 +91,7 @@
       })
     },
     methods: {
-      needShow(type, text) {
+      needShow (type, text) {
         if (this.onlyContent && !text) {
           return false
         }
@@ -102,17 +101,17 @@
           return type === this.selectType
         }
       },
-      selectRating(type) {
+      selectRating (type) {
         this.selectType = type
         this.$nextTick(() => {
           this.scroll.refresh()
-        });
+        })
       },
-      toggleContent() {
+      toggleContent () {
         this.onlyContent = !this.onlyContent
         this.$nextTick(() => {
           this.scroll.refresh()
-        });
+        })
       }
     },
     filters: {
@@ -126,7 +125,7 @@
       split,
       ratingselect
     }
-  };
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
