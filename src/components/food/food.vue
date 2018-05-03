@@ -64,8 +64,7 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
 import split from 'components/split/split'
 import ratingselect from 'components/ratingselect/ratingselect'
 
-// const POSITIVE = 0
-// const NEGTIVE = 1 
+
 const ALL = 2
   export default {
     name: 'food',
