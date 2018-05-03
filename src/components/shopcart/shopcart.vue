@@ -181,7 +181,7 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
 
     },
     computed: {
-      // 计算总价
+     
       totalPrice() {
         let total = 0
         this.selectFoods.forEach((food) => {
