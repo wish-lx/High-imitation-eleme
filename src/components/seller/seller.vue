@@ -1,5 +1,5 @@
 <template>
-  <div class="seller">
+  <div class="seller" ref="seller">
     <div class="seller-content ">
       <div class="overview">
         <h1 class="title">{{seller.name}}</h1>
@@ -43,10 +43,22 @@
               <span class="text"> {{seller.supports[index].description}}</span>
           </li>
       </ul>
+      <split></split>
+      <div class="pics">
+        <h1 class="title">商家实景</h1>
+        <div class="pic-wrapper" ref="picWrapper">
+          <ul class="pic-list" ref="picList">
+            <li class="pic-item" v-for="pic in seller.pics">
+               <img :src="pic" width="120" height="90">
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
+import BScroll from 'better-scroll'
 import star from 'components/star/star'
 import split from 'components/split/split'
 export default {
@@ -58,6 +70,30 @@ export default {
     this.classMap = [
       'decrease', 'discount', 'special', 'invoice', 'guarantee'
     ]
+  },
+  mounted() {
+   this._initScroll()
+   if (this.seller.pics) {
+     let picWidth = 120 
+     let margin = 6 
+     let width = (picWidth + margin) * this.seller.pics.length - margin
+     this.$refs.picList.style.width = width +'px'
+     this.$nextTick(() => {
+       this.picScroll = new Bscroll(this.$refs.picWrapper, {
+         scrollX: true,
+         eventPassThrough: 'vertical'
+       })
+     })
+   }
+  },
+  methods:{
+   _initScroll() {
+     if (!this.scroll) {
+         this.scroll = new BScroll(this.$refs.seller, {
+         click: true
+      })
+     }
+   }
   },
   components: {
     star,
@@ -158,4 +194,21 @@ export default {
       line-height: 16px 
       font-size: 12px 
       color: rgb(7,17,27)
+  .pics
+    padding: 18px
+    .title
+      margin-bottom: 12px
+      line-height: 14px 
+      color: rgb(7,17,27)
+    .pic-wrapper
+      width: 100%
+      overflow: hidden 
+      white-space: nowrap
+      .pic-item
+        display:  inline-block
+        margin-right: 6px
+        width: 120px 
+        height: 90px 
+        &:last-child
+           margin: 0
 </style>
